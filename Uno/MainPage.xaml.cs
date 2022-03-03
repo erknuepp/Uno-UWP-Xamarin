@@ -1,21 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -97,7 +88,7 @@ namespace Uno
             _currentPlayer = _players[turn % _players.Length];
 
             RoundLabel.Text = "Round " + _round;
-            DiscardPileLabel.Text = "Discard Pile: " + _discardPile.LastCardPlayed().Name;
+            DiscardPileLabel.Text = "Pile: " + _discardPile.LastCardPlayed().Name;
             PlayerNameLabel.Text = _currentPlayer.Name + " Hand";
             HandComboBox.ItemsSource = _currentPlayer.GetHand().Select(x => x.Name);
         }
@@ -124,12 +115,43 @@ namespace Uno
             if (discardIsValid)
             {
                 //TODO Check for and apply actions here???
+                
                 _discardPile.AddCard(card);
                 var previousPlayer = _currentPlayer;
                 turn++;
                 _currentPlayer = _players[turn % _players.Length];
+                
                 var lastCardPlayed = _discardPile.LastCardPlayed();
-                DiscardPileLabel.Text = "Discard Pile: " + lastCardPlayed.Name;
+                var type = lastCardPlayed.GetType();
+                if (type.BaseType == typeof(ActionCard))
+                {
+                    if(type == typeof(ReverseCard) || type == typeof(SkipCard))
+                    {
+                        turn++;
+                    }
+                    else if (type == typeof(DrawTwoCard))
+                    {
+                        
+                        _currentPlayer.TakeCard(_deck.Draw());
+                        _currentPlayer.TakeCard(_deck.Draw());
+                        turn++;
+                    }
+                    else if (type == typeof(WildDrawFourCard))
+                    {
+                        _currentPlayer.TakeCard(_deck.Draw());
+                        _currentPlayer.TakeCard(_deck.Draw());
+                        _currentPlayer.TakeCard(_deck.Draw());
+                        _currentPlayer.TakeCard(_deck.Draw());
+                    }
+                    else
+                    {
+                        Console.WriteLine("Issue with action cards.");
+                    }
+
+
+                }
+
+                DiscardPileLabel.Text = "Pile: " + lastCardPlayed.Name;
                 PlayerNameLabel.Text = _currentPlayer.Name + " Hand";
                 HandComboBox.ItemsSource = _currentPlayer.GetHand().Select(x => x.Name);
                 if (previousPlayer.GetHand().Count() == 0)
