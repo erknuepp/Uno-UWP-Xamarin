@@ -2,7 +2,6 @@
 {
     using System;
 
-
     internal class WildDrawFourCard : WildCard, IDrawable
     {
         const int value = 50;

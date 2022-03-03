@@ -1,6 +1,5 @@
 ﻿namespace Uno
 {
-
     internal class NumberCard : ColorCard
     {
         internal int Number { get; private set; }
