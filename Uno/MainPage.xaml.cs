@@ -4,7 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Windows.Foundation;
+using Windows.Graphics.Display;
 using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -24,7 +27,7 @@ namespace Uno
 
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             _deck = new Deck();
             _deck.Shuffle();
             _discardPile = new DiscardPile();
@@ -372,6 +375,27 @@ namespace Uno
         private void LeaveButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Exit();
+        }        
+
+        void MaximizeWindowOnLoad()
+        {
+            var view = DisplayInformation.GetForCurrentView();
+
+            // Get the screen resolution (APIs available from 14393 onward).
+            var resolution = new Size(view.ScreenWidthInRawPixels, view.ScreenHeightInRawPixels);
+
+            // Calculate the screen size in effective pixels. 
+            // Note the height of the Windows Taskbar is ignored here since the app will only be given the maxium available size.
+            var scale = view.ResolutionScale == ResolutionScale.Invalid ? 1 : view.RawPixelsPerViewPixel;
+            var bounds = new Size(resolution.Width / scale, resolution.Height / scale);
+
+            ApplicationView.PreferredLaunchViewSize = new Size(bounds.Width, bounds.Height);
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            MaximizeWindowOnLoad();
         }
     }
 }

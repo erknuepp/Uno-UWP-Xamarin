@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="Black"
-    FontSize="48" FontFamily="Arial Black" FontWeight="Bold">
+    FontSize="48" FontFamily="Arial Black" FontWeight="Bold" Loaded="Page_Loaded">
     <Border 
         BorderThickness="10"
         BorderBrush="Yellow"
