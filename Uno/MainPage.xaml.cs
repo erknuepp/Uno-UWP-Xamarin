@@ -111,8 +111,6 @@ namespace Uno
             }
             if (discardIsValid)
             {
-                //TODO Check for and apply actions here???
-
                 _discardPile.AddCard(card);
                 var previousPlayer = _currentPlayer;
                 AdvancePlay();
@@ -144,8 +142,6 @@ namespace Uno
                     {
                         Console.WriteLine("Issue with action cards.");
                     }
-
-
                 }
 
                 DiscardPileLabel.Text = "Pile: " + lastCardPlayed.Name;
@@ -163,11 +159,15 @@ namespace Uno
                     //shuffle deck
                     _deck.Shuffle();
 
+                    throw new NotImplementedException("re-initialize hands");
+
                     //deal
                     _deck.Deal(_players);
-                    //TODO flip first card
+                    
+                    
                     throw new NotImplementedException("flip first card");
                 }
+
                 while (!CanPlay(lastCardPlayed, _currentPlayer.GetHand()))
                 {
                     _currentPlayer.TakeCard(_deck.Draw());

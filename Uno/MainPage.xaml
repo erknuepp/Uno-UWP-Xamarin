@@ -48,6 +48,7 @@
             <TextBlock Text="Discard Pile" x:Name="DiscardPileLabel" Margin="0 20 0 20 " Foreground="White"/>
 
             <Grid Name="PlayerGrid" Visibility="Collapsed">
+                
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
@@ -56,30 +57,34 @@
                     <ColumnDefinition Width="33*"/>
                     <ColumnDefinition Width="33*"/>
                 </Grid.ColumnDefinitions>
+                
                 <TextBlock 
-                x:Name="PlayerNameLabel" 
-                Text="Click Play Game!" 
-                Foreground="White"
-                Grid.Column="0" 
-                HorizontalAlignment="Right" 
-                Margin="0,0,10,0"/>
+                    x:Name="PlayerNameLabel" 
+                    Text="Click Play Game!" 
+                    Foreground="White"
+                    Grid.Column="0" 
+                    HorizontalAlignment="Right" 
+                    Margin="0,0,10,0"/>
                 <ComboBox 
-                x:Name="HandComboBox" 
-                Grid.Column="1" 
-                MaxDropDownHeight="Infinity" 
-                CornerRadius="20"
-                Margin="50 10 0 0"
-                Width="Auto"
-                MinWidth="300"
-                >
-                </ComboBox>
+                    x:Name="HandComboBox" 
+                    Grid.Column="1" 
+                    MaxDropDownHeight="Infinity" 
+                    CornerRadius="20"
+                    Margin="50 16 0 0"
+                    Width="Auto"
+                    MinWidth="300"
+                />
+
                 <Button 
-                Grid.Column="2" 
-                Click="PlayCardButton_Click" 
-                Content="Play Card"/>
+                    Grid.Column="2" 
+                    Background="Green"
+                    Click="PlayCardButton_Click" 
+                    Content="Play Card"
+                    CornerRadius="20"/>
             </Grid>
 
             <TextBlock x:Name="OutputLabel"/>
+            
             <Button 
                 Background="#379711"
                 Click="PlayGameButton_Click" 
