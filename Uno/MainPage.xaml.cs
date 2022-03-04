@@ -19,7 +19,7 @@ namespace Uno
         private DiscardPile _discardPile;
         Player[] _players;
         private int _round = 1; //TODO See how to bind this to a label so it auto updates
-        private int turn = 0;
+        private int _turn = 0;
         private Player _currentPlayer;
 
         public MainPage()
@@ -50,30 +50,29 @@ namespace Uno
 
             //Flip fist card to discard pile
             var firstCard = _deck.Draw();
-            _discardPile.AddCard(firstCard);
+            _discardPile.AddCard(firstCard);            
 
-            if (firstCard.GetType() == typeof(WildCard))
+            _currentPlayer = _players[_turn % _players.Length];
+            var firstCardType = firstCard.GetType();
+            if (firstCardType == typeof(WildCard))
             {
                 //TODO Player gets to pick any color and has to play a card on that color
                 //or just let them play any card?
             }
-
             //Determine if first card flipped requires an action
-            if (firstCard.GetType().BaseType == typeof(ActionCard))
+            else if (firstCardType.BaseType == typeof(ActionCard))
             {
                 //TODO Add logic if first card is action card
                 //((ActionCard)firstCard).TakeAction(); //TODO rethink implementation
-                if (((ActionCard)firstCard).Action == Action.DrawTwo)
+                if (firstCardType == typeof(DrawTwoCard))
                 {
-                    //Add two cards to players hand, MoveNext
+                    _currentPlayer.TakeCard(_deck.Draw());
+                    _currentPlayer.TakeCard(_deck.Draw());
+                    AdvancePlay();
                 }
-                else if (((ActionCard)firstCard).Action == Action.Skip)
+                else if (firstCardType == typeof(SkipCard) || firstCardType == typeof(SkipCard))
                 {
-                    //MoveNext
-                }
-                else if (((ActionCard)firstCard).Action == Action.Reverse)
-                {
-                    //MoveNext
+                    AdvancePlay();
                 }
                 else if (((ActionCard)firstCard).Action == Action.DrawFour)
                 {
@@ -82,9 +81,6 @@ namespace Uno
             }
 
             //Update UI 
-
-            _currentPlayer = _players[turn % _players.Length];
-
             RoundLabel.Text = "Round " + _round;
             DiscardPileLabel.Text = "Pile: " + _discardPile.LastCardPlayed().Name;
             PlayerNameLabel.Text = _currentPlayer.Name + " Hand";
@@ -186,7 +182,7 @@ namespace Uno
 
         private void AdvancePlay()
         {
-            _currentPlayer = _players[++turn % _players.Length];
+            _currentPlayer = _players[++_turn % _players.Length];
             PlayerNameLabel.Text = _currentPlayer.Name + " Hand";
         }
 
