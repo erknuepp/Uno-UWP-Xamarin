@@ -8,8 +8,6 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 namespace Uno
 {
     /// <summary>
@@ -37,7 +35,7 @@ namespace Uno
             ((Button)sender).Visibility = Visibility.Collapsed;
             PlayerGrid.Visibility = Visibility.Visible;
             //Create players 
-            //Start with 2 players and see if we have time for more
+            //Start with 2 players and see if time for more
             //     (involves reversing player list or direction of play)
             var item = NumberOfPlayersComboBox.SelectedValue as ComboBoxItem;
             int numberOfPlayers = Convert.ToInt32(item.Content);
@@ -61,7 +59,7 @@ namespace Uno
             }
 
             //Determine if first card flipped requires an action
-            if (firstCard.GetType() == typeof(ActionCard))
+            if (firstCard.GetType().BaseType == typeof(ActionCard))
             {
                 //TODO Add logic if first card is action card
                 //((ActionCard)firstCard).TakeAction(); //TODO rethink implementation
@@ -115,26 +113,25 @@ namespace Uno
             if (discardIsValid)
             {
                 //TODO Check for and apply actions here???
-                
+
                 _discardPile.AddCard(card);
                 var previousPlayer = _currentPlayer;
-                turn++;
-                _currentPlayer = _players[turn % _players.Length];
-                
+                AdvancePlay();
+
                 var lastCardPlayed = _discardPile.LastCardPlayed();
                 var type = lastCardPlayed.GetType();
                 if (type.BaseType == typeof(ActionCard))
                 {
-                    if(type == typeof(ReverseCard) || type == typeof(SkipCard))
+                    if (type == typeof(ReverseCard) || type == typeof(SkipCard))
                     {
-                        turn++;
+                        AdvancePlay();
                     }
                     else if (type == typeof(DrawTwoCard))
                     {
-                        
+
                         _currentPlayer.TakeCard(_deck.Draw());
                         _currentPlayer.TakeCard(_deck.Draw());
-                        turn++;
+                        AdvancePlay();
                     }
                     else if (type == typeof(WildDrawFourCard))
                     {
@@ -142,6 +139,7 @@ namespace Uno
                         _currentPlayer.TakeCard(_deck.Draw());
                         _currentPlayer.TakeCard(_deck.Draw());
                         _currentPlayer.TakeCard(_deck.Draw());
+                        AdvancePlay();
                     }
                     else
                     {
@@ -184,6 +182,12 @@ namespace Uno
 
             //Note there should probably be a redunacy check to make sure the total is 108 cards
 
+        }
+
+        private void AdvancePlay()
+        {
+            _currentPlayer = _players[++turn % _players.Length];
+            PlayerNameLabel.Text = _currentPlayer.Name + " Hand";
         }
 
         /// <summary>
@@ -367,6 +371,11 @@ namespace Uno
             }
             winner.Score = points;
             _round++;
+        }
+
+        private void LeaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Exit();
         }
     }
 }
