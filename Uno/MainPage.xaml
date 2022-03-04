@@ -6,66 +6,64 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="Black"
-    FontSize="36">
+    FontSize="48" FontFamily="Arial Black" FontWeight="Bold">
     <Border 
         BorderThickness="10"
         BorderBrush="Yellow"
         CornerRadius="10">
-        <StackPanel
-        Padding="50"
-        >
-        
-        <Image Source="/Assets/1280px-UNO_Logo.svg.png" Height="100" Margin="0 10 0 0"/>
-        
-        <TextBlock 
+        <StackPanel Padding="50">
+
+            <Image Source="/Assets/1280px-UNO_Logo.svg.png" Height="100" Margin="0 10 0 0"/>
+
+            <TextBlock 
             Text="Round"
                 Foreground="White"
             x:Name="RoundLabel" />
-        <Grid Visibility="Collapsed" Height="0">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            
-            <ComboBox x:Name="NumberOfPlayersComboBox" 
+            <Grid Visibility="Collapsed" Height="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <ComboBox x:Name="NumberOfPlayersComboBox" 
                       Grid.Column="1" SelectedIndex="0" 
                       IsEnabled="False" >
-                <ComboBoxItem Content="2"/>
-                <ComboBoxItem Content="3"/>
-                <ComboBoxItem Content="4"/>
-                <ComboBoxItem Content="5"/>
-                <ComboBoxItem Content="6"/>
-                <ComboBoxItem Content="7"/>
-                <ComboBoxItem Content="8"/>
-                <ComboBoxItem Content="9"/>
-                <ComboBoxItem Content="10"/>
-            </ComboBox>
+                    <ComboBoxItem Content="2"/>
+                    <ComboBoxItem Content="3"/>
+                    <ComboBoxItem Content="4"/>
+                    <ComboBoxItem Content="5"/>
+                    <ComboBoxItem Content="6"/>
+                    <ComboBoxItem Content="7"/>
+                    <ComboBoxItem Content="8"/>
+                    <ComboBoxItem Content="9"/>
+                    <ComboBoxItem Content="10"/>
+                </ComboBox>
 
-        </Grid>
-        
-        <TextBlock Text="Discard Pile" x:Name="DiscardPileLabel" Margin="0 20 0 20 " Foreground="White"/>
-        
-        <Grid Name="PlayerGrid" Visibility="Collapsed">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="33*"/>
-                <ColumnDefinition Width="33*"/>
-                <ColumnDefinition Width="33*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock 
+            </Grid>
+
+            <TextBlock Text="Discard Pile" x:Name="DiscardPileLabel" Margin="0 20 0 20 " Foreground="White"/>
+
+            <Grid Name="PlayerGrid" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="33*"/>
+                    <ColumnDefinition Width="33*"/>
+                    <ColumnDefinition Width="33*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
                 x:Name="PlayerNameLabel" 
                 Text="Click Play Game!" 
                 Foreground="White"
                 Grid.Column="0" 
                 HorizontalAlignment="Right" 
                 Margin="0,0,10,0"/>
-            <ComboBox 
+                <ComboBox 
                 x:Name="HandComboBox" 
                 Grid.Column="1" 
                 MaxDropDownHeight="Infinity" 
@@ -74,34 +72,49 @@
                 Width="Auto"
                 MinWidth="300"
                 >
-            </ComboBox>
-            <Button 
+                </ComboBox>
+                <Button 
                 Grid.Column="2" 
                 Click="PlayCardButton_Click" 
                 Content="Play Card"/>
-        </Grid>
+            </Grid>
 
-        <TextBlock x:Name="OutputLabel"/>
-        <Button 
-            Background="#379711"
-            Click="PlayGameButton_Click" 
-            Content="Play Game" 
-            FontSize="24"
-            Foreground="White"
-            Grid.Column="2" 
-            Height="50"
-            HorizontalAlignment="Center"
-            Margin="0 50"
-            Width="250"/>
-        
-        <StackPanel>
-            <TextBlock 
+            <TextBlock x:Name="OutputLabel"/>
+            <Button 
+                Background="#379711"
+                Click="PlayGameButton_Click" 
+                Content="Play" 
+                FontSize="36"
+                CornerRadius="50"
+                FontWeight="Bold"
+                Foreground="White"
+                Grid.Column="2" 
+                Height="75"
+                HorizontalAlignment="Center"
+                Margin="0 50"
+                Width="200" 
+                FontFamily="Arial Black"/>
+
+            <StackPanel>
+                <TextBlock 
                 x:Name="InstructionsLabel"
                 Text="Play the same Color, Number, Action OR play a Wild" 
                 Foreground="White"
                 Margin="20" 
                 HorizontalAlignment="Center"/>
+            </StackPanel>
+            <Button 
+                FontFamily="Arial Black" 
+                Click="LeaveButton_Click" 
+                Content="Leave" 
+                CornerRadius="50"
+                Background="#D72600" 
+                FontWeight="Bold" 
+                FontSize="36" 
+                Height="75"
+                HorizontalAlignment="Right" 
+                Margin="0,20,0,20"
+                Width="200"/>
         </StackPanel>
-    </StackPanel>
     </Border>
 </Page>
