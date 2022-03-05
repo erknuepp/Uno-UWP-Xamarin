@@ -2,17 +2,12 @@
 {
     using System;
 
-    internal class WildDrawFourCard : WildCard, IDrawable
+    internal class WildDrawFourCard : WildCard
     {
         const int value = 50;
 
         public WildDrawFourCard(string name = "Wild Draw Four") : base(name)
         {
-        }
-
-        public void TakeDraw()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -131,8 +131,6 @@
     <Compile Include="Classes\Deck.cs" />
     <Compile Include="Classes\DiscardPile.cs" />
     <Compile Include="Classes\Player.cs" />
-    <Compile Include="Contracts\IActionable.cs" />
-    <Compile Include="Contracts\IDrawable.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
