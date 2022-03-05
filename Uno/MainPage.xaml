@@ -70,8 +70,9 @@
                     Grid.Column="1" 
                     MaxDropDownHeight="Infinity" 
                     CornerRadius="20"
-                    Margin="50 16 0 0"
+                    Margin="50 6 0 0"
                     Width="Auto"
+                    Height="48"
                     MinWidth="300"
                 />
 
@@ -80,7 +81,12 @@
                     Background="Green"
                     Click="PlayCardButton_Click" 
                     Content="Play Card"
-                    CornerRadius="20"/>
+                    Height="48"
+                    FontWeight="Bold"
+                    FontSize="24"
+                    CornerRadius="20"
+                    Padding="20 0 20 0"
+                    />
             </Grid>
 
             <TextBlock x:Name="OutputLabel"/>
@@ -112,14 +118,16 @@
                 FontFamily="Arial Black" 
                 Click="LeaveButton_Click" 
                 Content="Leave" 
-                CornerRadius="50"
+                
                 Background="#D72600" 
-                FontWeight="Bold" 
-                FontSize="36" 
-                Height="75"
+                Height="48"
+                    FontWeight="Bold"
+                    FontSize="24"
+                    CornerRadius="20"
+                    Padding="20 0 20 0"
                 HorizontalAlignment="Right" 
                 Margin="0,20,0,20"
-                Width="200"/>
+                />
         </StackPanel>
     </Border>
 </Page>

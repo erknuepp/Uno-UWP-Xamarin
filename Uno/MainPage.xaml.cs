@@ -145,7 +145,7 @@ namespace Uno
                 }
 
                 DiscardPileLabel.Text = "Pile: " + lastCardPlayed.Name;
-                PlayerNameLabel.Text = _currentPlayer.Name + " Hand";
+                //PlayerNameLabel.Text = _currentPlayer.Name + " Hand";
                 HandComboBox.ItemsSource = _currentPlayer.GetHand().Select(x => x.Name);
                 if (previousPlayer.GetHand().Count() == 0)
                 {
