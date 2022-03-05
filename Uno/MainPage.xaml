@@ -117,17 +117,15 @@
             <Button 
                 FontFamily="Arial Black" 
                 Click="LeaveButton_Click" 
-                Content="Leave" 
-                
+                Content="Leave"           
                 Background="#D72600" 
                 Height="48"
-                    FontWeight="Bold"
-                    FontSize="24"
-                    CornerRadius="20"
-                    Padding="20 0 20 0"
+                FontWeight="Bold"
+                FontSize="24"
+                CornerRadius="20"
+                Padding="20 0 20 0"
                 HorizontalAlignment="Right" 
-                Margin="0,20,0,20"
-                />
+                Margin="0 20 0 20"/>
         </StackPanel>
     </Border>
 </Page>
